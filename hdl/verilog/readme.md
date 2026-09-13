@@ -28,6 +28,7 @@ Deeper notes on specific topics live in [`detail/`](detail/):
 - [always_comb / always_ff (combinational vs sequential)](detail/always_comb_ff.md) — blocking vs non-blocking, latch inference, why SystemVerilog split `always` into three
 - [Quick reference](detail/reference.md) — syntax cheat sheet (module skeleton, data types, operators, common constructs)
 - [Linting](detail/linter.md) — common linters, what they catch, how to run one
+- [Simulation & synthesis](detail/simulation_synthesis.md) — simulators vs synthesis/compiler tools, common tools, example commands, where each catches problems
 
 ---
 
