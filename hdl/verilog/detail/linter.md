@@ -27,6 +27,7 @@ Open-source tools (Verilator, Verible) are normally enough for day-to-day RTL hy
 - **Width mismatches** — assigning a wider or narrower value than the target without an explicit cast, which can silently truncate or zero/sign-extend.
 - **Implicit net declarations** — using a signal name without declaring it (Verilog silently makes it a 1-bit `wire`) — usually a typo. `` `default_nettype none `` at the top of a file turns this into a compile error.
 - **X-propagation risk** — reset or enable logic that could let an unknown (`x`) value propagate into control logic.
+- **Inline `for`-loop variable declarations** — some strict style guides/lint rule decks forbid `for (int i = ...)` and require the loop variable pre-declared instead, for portability or house-style consistency. See [reference.md](reference.md).
 
 ## Running a quick local check (example: Verilator)
 

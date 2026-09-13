@@ -124,6 +124,45 @@ endgenerate
 | Produces | one signal, updated repeatedly | N copies of hardware |
 | Legal where | `always`/`initial`/tasks/functions | only inside a `generate` block |
 
+#### Using an integer variable in a `for` loop — two styles
+
+```systemverilog
+// 1) declared beforehand — required in plain Verilog, also legal in SV.
+//    'i' is visible (and keeps its last value) for the rest of the module/task
+//    after the loop ends, and can be reused by a later, separate for loop.
+integer i;
+initial begin
+  for (i = 0; i < 8; i = i + 1)
+    $display("i = %0d", i);
+end
+
+// 2) declared inline in the loop header — SystemVerilog only.
+//    'i' is scoped to just this loop: it doesn't exist before or after it,
+//    so it can't collide with another loop's variable of the same name.
+initial begin
+  for (int i = 0; i < 8; i++)
+    $display("i = %0d", i);
+end
+
+// nested loops each need their OWN integer variable — reusing one variable
+// as both the outer and inner index silently corrupts the outer count.
+initial begin
+  for (int row = 0; row < 4; row++)
+    for (int col = 0; col < 4; col++)
+      mem[row][col] = '0;
+end
+```
+
+Style 2 (inline `int`) is the common modern default for testbenches/`initial` blocks since it can't leak
+or clash; style 1 (pre-declared `integer`) is what plain Verilog requires, and is still the only option
+in tools/blocks that don't support inline declarations.
+
+**Watch for lint rules that forbid style 2.** Some strict style guides / lint rule decks (in-house
+rule sets, or Verible lint rules configured for it) disallow declaring the loop variable inline and
+require it pre-declared instead — for consistency with plain-Verilog code, or because older
+tools in the flow don't support inline declarations. Check your project's lint config before
+defaulting to `for (int i = ...)`; if it's disallowed, fall back to style 1 (pre-declared `integer`/`int`).
+
 ```systemverilog
 // interface + modport (SV only)
 interface bus_if (input logic clk);
