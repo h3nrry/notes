@@ -26,6 +26,7 @@ Deeper notes on specific topics live in [`detail/`](detail/):
 - [Functions & tasks](detail/function.md) — Verilog function/task rules and what SystemVerilog adds
 - [State machines](detail/state_machine.md) — FSM styles, encoding, reset conventions
 - [always_comb / always_ff (combinational vs sequential)](detail/always_comb_ff.md) — blocking vs non-blocking, latch inference, why SystemVerilog split `always` into three
+- [Data types](detail/data_types.md) — signal types vs. compile-time constants, `enum`/`struct`, and how `parameter`/`localparam` relate to variable declaration
 - [Quick reference](detail/reference.md) — syntax cheat sheet (module skeleton, data types, operators, common constructs)
 - [Linting](detail/linter.md) — common linters, what they catch, how to run one
 - [Simulation & synthesis](detail/simulation_synthesis.md) — simulators vs synthesis/compiler tools, common tools, example commands, where each catches problems

@@ -2,7 +2,7 @@
 
 ## How to use this file
 
-This is a syntax cheat sheet for quick lookup while coding — module skeletons, data types, operators, and common constructs in one place. It intentionally stays short: for the *why* behind a rule, follow the link out to the matching deep-dive doc in this folder ([function.md](function.md), [state_machine.md](state_machine.md), [always_comb_ff.md](always_comb_ff.md), [linter.md](linter.md)). When this reference and a deep-dive doc disagree, the deep-dive doc is right — update this file to match.
+This is a syntax cheat sheet for quick lookup while coding — module skeletons, data types, operators, and common constructs in one place. It intentionally stays short: for the *why* behind a rule, follow the link out to the matching deep-dive doc in this folder ([data_types.md](data_types.md), [function.md](function.md), [state_machine.md](state_machine.md), [always_comb_ff.md](always_comb_ff.md), [linter.md](linter.md)). When this reference and a deep-dive doc disagree, the deep-dive doc is right — update this file to match.
 
 ## Module skeleton (SystemVerilog)
 
@@ -26,24 +26,9 @@ endmodule
 
 ## Data types
 
-| Type | Kind | Notes |
-|---|---|---|
-| `wire` | 4-state, net | continuous assignment target (`assign`), or module output |
-| `reg` | 4-state, variable | Verilog's procedural-assignment type (name is historical — doesn't imply a real register) |
-| `logic` | 4-state, variable | SystemVerilog: replaces `reg`/`wire` for most signals; can't be driven by more than one source |
-| `bit` | 2-state | SystemVerilog; `0`/`1` only, no `x`/`z` — good for testbench state, not for RTL that must model unknowns |
-| `int` / `integer` | 2-state / 4-state | `int` is SV, 2-state, 32-bit; `integer` is Verilog, 4-state, 32-bit |
-| `byte`, `shortint`, `longint` | 2-state | SystemVerilog fixed-width integer types (8/16/64-bit) |
-| `enum` | user-defined | SystemVerilog; see [state_machine.md](state_machine.md) |
-| `struct` / `union` | user-defined | SystemVerilog; group related signals |
-
-### Declaring loop / integer variables
-
-```systemverilog
-integer i;   // Verilog, 4-state, 32-bit — usable in any procedural block (always/initial/task/function)
-int    j;    // SystemVerilog, 2-state, 32-bit — same role, tighter (X/Z-free) semantics
-genvar k;    // elaboration-only index — legal ONLY inside a generate block, no storage/hardware
-```
+Moved to its own note — [data_types.md](data_types.md) covers the full type table, `4-state` vs.
+`2-state`, `enum`/`struct`, and how `parameter`/`localparam` relate to (and differ from) variable
+declaration.
 
 ## Operators (most-used)
 
